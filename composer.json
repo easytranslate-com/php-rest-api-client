@@ -1,0 +1,15 @@
+{
+    "name": "easytranslate/lib",
+    "description": "This module provides a general library for use with the Easytranslate modules for Magento 1 and Magento 2",
+    "type": "library",
+    "require": {
+        "php": "~7.3.0||~7.4.0"
+    },
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "Team CustomGento",
+            "email": "info@customgento.com"
+        }
+    ]
+}
