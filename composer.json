@@ -1,6 +1,6 @@
 {
     "name": "easytranslate/rest-api-client",
-    "description": "This module provides a general library for use with the EasyTranslate modules for Magento 1 and Magento 2",
+    "description": "This package provides a PHP wrapper for the EasyTranslate REST API.",
     "type": "library",
     "require": {
         "php": "~7.3.0||~7.4.0"
