@@ -101,8 +101,9 @@ abstract class AbstractApi
 
     protected function setCurlPostData(RequestInterface $request, $curl): void
     {
-        if ($request->getData()) {
-            $data = json_encode(['data' => $request->getData()]);
+        $data = $request->getData();
+        if ($data) {
+            $data = json_encode(['data' => $data]);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
         }
     }
