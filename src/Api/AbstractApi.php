@@ -17,7 +17,7 @@ abstract class AbstractApi
         = [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER         => false,
-            CURLOPT_FAILONERROR    => true,
+            CURLOPT_FAILONERROR    => false,
             CURLOPT_HTTPHEADER     => [
                 'Accept: application/json'
             ]
@@ -46,17 +46,20 @@ abstract class AbstractApi
         $this->setCurlRequestType($curl, $request);
         $this->setCurlOptions($curl, $request);
         $this->setCurlPostData($request, $curl);
-
         $jsonResponse = curl_exec($curl);
+        $json         = json_decode($jsonResponse, true);
         if (curl_errno($curl)) {
             $error = curl_error($curl);
         }
         curl_close($curl);
+        if (!empty($json['errors']) && !empty($json['data']['message'])) {
+            throw new ApiException($json['data']['message']);
+        }
         if (isset($error)) {
             throw new ApiException($error);
         }
 
-        return json_decode($jsonResponse, true);
+        return $json;
     }
 
     private function setCurlUrl($curl, RequestInterface $request): void
