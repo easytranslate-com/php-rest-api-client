@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace EasyTranslate\RestApiClient\Api;
 
 use EasyTranslate\RestApiClient\Api\Request\AcceptPriceRequest;
@@ -14,7 +12,11 @@ use EasyTranslate\RestApiClient\ProjectInterface;
 
 class ProjectApi extends AbstractApi
 {
-    public function sendProject(ProjectInterface $project): CreateProjectResponse
+    /**
+     * @param \EasyTranslate\RestApiClient\ProjectInterface $project
+     * @return \EasyTranslate\RestApiClient\Api\Response\CreateProjectResponse
+     */
+    public function sendProject($project)
     {
         $request = new CreateProjectRequest($project);
 
@@ -23,7 +25,11 @@ class ProjectApi extends AbstractApi
         return new CreateProjectResponse($data);
     }
 
-    public function acceptPrice(ProjectInterface $project): AcceptPriceResponse
+    /**
+     * @param \EasyTranslate\RestApiClient\ProjectInterface $project
+     * @return \EasyTranslate\RestApiClient\Api\Response\AcceptPriceResponse
+     */
+    public function acceptPrice($project)
     {
         $request = new AcceptPriceRequest($project);
 
@@ -32,7 +38,11 @@ class ProjectApi extends AbstractApi
         return new AcceptPriceResponse($data);
     }
 
-    public function declinePrice(ProjectInterface $project): DeclinePriceResponse
+    /**
+     * @param \EasyTranslate\RestApiClient\ProjectInterface $project
+     * @return \EasyTranslate\RestApiClient\Api\Response\DeclinePriceResponse
+     */
+    public function declinePrice($project)
     {
         $request = new DeclinePriceRequest($project);
 

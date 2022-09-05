@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace EasyTranslate\RestApiClient\Api\Request;
 
 use EasyTranslate\RestApiClient\ProjectInterface;
@@ -25,7 +23,10 @@ class DownloadTaskTargetContentRequest extends AbstractRequest
         $this->task    = $task;
     }
 
-    public function getResource(): string
+    /**
+     * @return string
+     */
+    public function getResource()
     {
         return sprintf('api/v1/teams/%s/projects/%s/tasks/%s/download', $this->project->getTeam(),
             $this->project->getId(), $this->task->getId());

@@ -1,16 +1,26 @@
 <?php
 
-declare(strict_types=1);
-
 namespace EasyTranslate\RestApiClient;
 
 interface TaskInterface
 {
-    public function getId(): string;
+    /**
+     * @return string
+     */
+    public function getId();
 
-    public function getProject(): ProjectInterface;
+    /**
+     * @return \EasyTranslate\RestApiClient\ProjectInterface
+     */
+    public function getProject();
 
-    public function getTargetContent(): ?string;
+    /**
+     * @return string|null
+     */
+    public function getTargetContent();
 
-    public function getTargetLanguage(): string;
+    /**
+     * @return string
+     */
+    public function getTargetLanguage();
 }

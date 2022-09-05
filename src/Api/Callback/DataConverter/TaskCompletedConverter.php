@@ -1,14 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
 namespace EasyTranslate\RestApiClient\Api\Callback\DataConverter;
 
 use EasyTranslate\RestApiClient\Api\Response\TaskCompletedResponse;
 
 class TaskCompletedConverter
 {
-    public function convert(array $data): TaskCompletedResponse
+    /**
+     * @param mixed[] $data
+     * @return \EasyTranslate\RestApiClient\Api\Response\TaskCompletedResponse
+     */
+    public function convert($data)
     {
         return new TaskCompletedResponse($data);
     }
