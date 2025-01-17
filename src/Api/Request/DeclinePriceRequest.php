@@ -25,6 +25,6 @@ class DeclinePriceRequest extends AbstractRequest
 
     public function getResource(): string
     {
-        return sprintf('api/v1/teams/%s/projects/%s/decline-price', $this->project->getTeam(), $this->project->getId());
+        return sprintf('laas/api/v1/teams/%s/projects/%s/decline-price', $this->project->getTeam(), $this->project->getId());
     }
 }
