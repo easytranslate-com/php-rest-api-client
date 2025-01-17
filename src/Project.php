@@ -39,7 +39,7 @@ class Project implements ProjectInterface
     /**
      * @var string
      */
-    private $workflow = Workflow::TYPE_TRANSLATION;
+    private $workflowId;
 
     /**
      * @var string
@@ -101,9 +101,9 @@ class Project implements ProjectInterface
         return $this->content;
     }
 
-    public function getWorkflow(): string
+    public function getWorkflowId(): string
     {
-        return $this->workflow;
+        return $this->workflowId;
     }
 
     public function getFolderId(): ?string
@@ -166,9 +166,9 @@ class Project implements ProjectInterface
         $this->content = $content;
     }
 
-    public function setWorkflow(string $workflow): void
+    public function setWorkflowId(string $workflowId): void
     {
-        $this->workflow = $workflow;
+        $this->workflowId = $workflowId;
     }
 
     public function setFolderId(?string $folderId): void

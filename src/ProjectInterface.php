@@ -18,7 +18,7 @@ interface ProjectInterface
 
     public function getContent(): ?array;
 
-    public function getWorkflow(): string;
+    public function getWorkflowId(): string;
 
     public function getFolderId(): ?string;
 

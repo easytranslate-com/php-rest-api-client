@@ -25,19 +25,19 @@ class CreateProjectRequest extends AbstractRequest
 
     public function getResource(): string
     {
-        return sprintf('api/v1/teams/%s/projects', $this->project->getTeam());
+        return sprintf('laas/api/v2/teams/%s/projects', $this->project->getTeam());
     }
 
     public function getData(): array
     {
         $data = [
-            'type'       => 'project',
+            'type'       => 'projects',
             'attributes' => [
                 'name'             => $this->project->getName(),
                 'source_language'  => $this->project->getSourceLanguage(),
                 'target_languages' => $this->project->getTargetLanguages(),
                 'content'          => $this->project->getContent(),
-                'workflow'         => $this->project->getWorkflow(),
+                'workflow_id'      => $this->project->getWorkflowId(),
                 'callback_url'     => $this->project->getCallbackUrl(),
             ],
         ];

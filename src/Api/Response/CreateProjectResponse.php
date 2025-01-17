@@ -19,7 +19,7 @@ class CreateProjectResponse extends AbstractResponse
     public function mapFields(array $data): void
     {
         parent::mapFields($data);
-        if (!isset($data['data']['type'], $data['data']['id']) || $data['data']['type'] !== 'project') {
+        if (!isset($data['data']['type'], $data['data']['id']) || $data['data']['type'] !== 'projects') {
             throw new ApiException(sprintf('Invalid response data in response class %s', self::class));
         }
         $project = new Project();
@@ -28,10 +28,9 @@ class CreateProjectResponse extends AbstractResponse
         $project->setTeam($team);
         $project->setSourceLanguage($data['data']['attributes']['source_language']);
         $project->setTargetLanguages($data['data']['attributes']['target_languages']);
-        $project->setFolderId($data['data']['attributes']['folder_id']);
-        $project->setFolderName($data['data']['attributes']['folder_name']);
+        $project->setFolderId($data['data']['attributes']['folder']);
         $project->setName($data['data']['attributes']['name']);
-        $project->setWorkflow($data['data']['attributes']['workflow']);
+        $project->setWorkflowId($data['data']['attributes']['workflow']['id']);
         $tasks = $this->extractTasks($data, $project);
         $project->setTasks($tasks);
         if (isset($data['data']['attributes']['price'])) {
@@ -43,27 +42,21 @@ class CreateProjectResponse extends AbstractResponse
 
     private function extractTeam(array $data): string
     {
-        if (!isset($data['included'])) {
+        if (!isset($data['data']['attributes']['account']['attributes'])) {
             return '';
         }
 
-        foreach ($data['included'] as $includedObject) {
-            if (isset($includedObject['type']) && $includedObject['type'] === 'account') {
-                return $includedObject['attributes']['team_identifier'];
-            }
-        }
-
-        return '';
+        return $data['data']['attributes']['account']['attributes']['team_identifier'];
     }
 
     private function extractTasks(array $data, ProjectInterface $project): array
     {
         $tasks = [];
-        if (!isset($data['included'])) {
+        if (!isset($data['attributes']['tasks'])) {
             return $tasks;
         }
 
-        foreach ($data['included'] as $includedObject) {
+        foreach ($data['attributes']['tasks'] as $includedObject) {
             if (!isset($includedObject['type']) || $includedObject['type'] !== 'task') {
                 continue;
             }
