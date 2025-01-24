@@ -14,7 +14,29 @@ class ShowLoggedTeamAccountDetailsResponse extends AbstractResponse
      */
     private $workflows = [];
 
+    /**
+     * @var array
+     */
+    private $languagePairsByWorkflow = [];
+
     public function mapFields(array $data): void
+    {
+        $this->extractWorkflows($data);
+        $this->extractLanguagePairs($data);
+        parent::mapFields($data);
+    }
+
+    public function getWorkflows(): array
+    {
+        return $this->workflows;
+    }
+
+    public function getLanguagePairsByWorkflow(): array
+    {
+        return $this->languagePairsByWorkflow;
+    }
+
+    public function extractWorkflows(array $data): void
     {
         foreach ((array)$data['data']['attributes']['workflows'] as $workflowData) {
             if (!$this->isValidWorkflowData($workflowData)) {
@@ -29,20 +51,10 @@ class ShowLoggedTeamAccountDetailsResponse extends AbstractResponse
             $workflow->setIsAvailable($workflowData['attributes']['is_available']);
             $this->workflows[] = $workflow;
         }
-        parent::mapFields($data);
     }
 
-    public function getWorkflows(): array
+    private function isValidWorkflowData(array $workflowData): bool
     {
-        return $this->workflows;
-    }
-
-    private function isValidWorkflowData(mixed $workflowData): bool
-    {
-        if (!is_array($workflowData)) {
-            return false;
-        }
-
         return isset(
                 $workflowData['type'],
                 $workflowData['id'],
@@ -53,5 +65,17 @@ class ShowLoggedTeamAccountDetailsResponse extends AbstractResponse
                 $workflowData['attributes']['is_available'],
             )
             && $workflowData['type'] === 'account_workflows';
+    }
+
+    private function extractLanguagePairs(array $data): void
+    {
+        foreach ((array)$data['data']['attributes']['language_pairs'] as $workflow => $languagePairs) {
+            foreach ($languagePairs as $languagePair) {
+                $this->languagePairsByWorkflow[$workflow][$languagePair['code']] = array_column(
+                    $languagePair['target_languages'],
+                    'code'
+                );
+            }
+        }
     }
 }
