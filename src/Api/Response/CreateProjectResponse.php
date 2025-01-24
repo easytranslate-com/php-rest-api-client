@@ -52,11 +52,11 @@ class CreateProjectResponse extends AbstractResponse
     private function extractTasks(array $data, ProjectInterface $project): array
     {
         $tasks = [];
-        if (!isset($data['attributes']['tasks'])) {
+        if (!isset($data['data']['attributes']['tasks'])) {
             return $tasks;
         }
 
-        foreach ($data['attributes']['tasks'] as $includedObject) {
+        foreach ($data['data']['attributes']['tasks'] as $includedObject) {
             if (!isset($includedObject['type']) || $includedObject['type'] !== 'task') {
                 continue;
             }
