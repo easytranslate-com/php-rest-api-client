@@ -26,6 +26,11 @@ class Task implements TaskInterface
      */
     private $targetLanguage;
 
+    /**
+     * @var string
+     */
+    private $status;
+
     public function getId(): string
     {
         return $this->id;
@@ -46,6 +51,11 @@ class Task implements TaskInterface
         return $this->targetLanguage;
     }
 
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
     public function setId(string $id): void
     {
         $this->id = $id;
@@ -64,5 +74,10 @@ class Task implements TaskInterface
     public function setTargetLanguage(string $targetLanguage): void
     {
         $this->targetLanguage = $targetLanguage;
+    }
+
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
     }
 }
