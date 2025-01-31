@@ -29,8 +29,9 @@ class TaskCompletedResponse extends AbstractResponse
         $task = new Task();
         $task->setId($data['data']['id']);
         $this->projectId = $data['data']['attributes']['project']['id'];
-        $task->setTargetContent($data['data']['attributes']['target_content']);
-        $task->setTargetLanguage($data['data']['attributes']['target_language']);
+        $task->setTargetContent($data['data']['attributes']['target_content'] ?? '');
+        $task->setTargetLanguage($data['data']['attributes']['target_language'] ?? '');
+        $task->setStatus($data['data']['attributes']['status'] ?? '');
         $this->task = $task;
     }
 
