@@ -63,7 +63,8 @@ class CreateProjectResponse extends AbstractResponse
             $task = new Task();
             $task->setId($includedObject['id']);
             $task->setProject($project);
-            $task->setTargetLanguage($includedObject['attributes']['target_language']);
+            $task->setTargetLanguage($includedObject['attributes']['target_language'] ?? '');
+            $task->setStatus($includedObject['attributes']['status'] ?? '');
             $tasks[] = $task;
         }
 
