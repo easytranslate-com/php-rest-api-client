@@ -46,7 +46,7 @@ class ShowLoggedTeamAccountDetailsResponse extends AbstractResponse
             $workflow->setId($workflowData['id']);
             $workflow->setIdentifier($workflowData['attributes']['identifier']);
             $workflow->setDisplayName($workflowData['attributes']['display_name']);
-            $workflow->setDescription($workflowData['attributes']['description']);
+            $workflow->setDescription($workflowData['attributes']['description'] ?? '');
             $workflow->setStatus($workflowData['attributes']['status']);
             $workflow->setIsAvailable($workflowData['attributes']['is_available']);
             $this->workflows[] = $workflow;
@@ -60,7 +60,6 @@ class ShowLoggedTeamAccountDetailsResponse extends AbstractResponse
                 $workflowData['id'],
                 $workflowData['attributes']['identifier'],
                 $workflowData['attributes']['display_name'],
-                $workflowData['attributes']['description'],
                 $workflowData['attributes']['status'],
                 $workflowData['attributes']['is_available'],
             )
